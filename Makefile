@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
+KBUILD_OPTIONS += VIDEO_ROOT=$(KERNEL_SRC)/$(M)
+KBUILD_OPTIONS += BOARD_PLATFORM=$(TARGET_BOARD_PLATFORM)
+KBUILD_OPTIONS += KBUILD_EXTRA_SYMBOLS=$(OUT_DIR)/../sm8635-modules/qcom/opensource/mmrm-driver/Module.symvers
 VIDEO_COMPILE_TIME = $(shell date)
 VIDEO_COMPILE_BY = $(shell whoami | sed 's/\\/\\\\/')
 VIDEO_COMPILE_HOST = $(shell uname -n)
