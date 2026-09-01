@@ -1,6 +1,10 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
-KBUILD_OPTIONS += VIDEO_ROOT=$(KERNEL_SRC)/$(M)
+# VIDEO_ROOT must be set in THIS make, not only passed down: the
+# $(VIDEO_GEN_PATH) rule below dereferences it here. Left unset it becomes
+# /driver/vidc/inc/video_generated_h and the recipe fails with Error 1.
+VIDEO_ROOT ?= $(KERNEL_SRC)/$(M)
+KBUILD_OPTIONS += VIDEO_ROOT=$(VIDEO_ROOT)
 KBUILD_OPTIONS += BOARD_PLATFORM=$(TARGET_BOARD_PLATFORM)
 KBUILD_OPTIONS += KBUILD_EXTRA_SYMBOLS=$(OUT_DIR)/../sm8635-modules/qcom/opensource/mmrm-driver/Module.symvers
 VIDEO_COMPILE_TIME = $(shell date)
